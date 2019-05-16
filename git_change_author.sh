@@ -47,6 +47,16 @@ if [[ -z "$OLD_EMAIL" || -z "$NEW_EMAIL" || -z "$NEW_USERNAME" ]] ; then
     command_error
 fi
 
+# ##### ##### ##### assurance ##### ##### #####
+
+echo '\nAre you sure to change commiter and author of all commits of all branches'
+echo "from <$OLD_EMAIL> to <$NEW_EMAIL> [y/n]?"
+read assurance
+
+if ! [[ ${assurance} == 'y' || ${assurance} == 'Y' ]]; then
+    exit 0;
+fi
+
 # ##### ##### ##### set command for git ##### ##### #####
 
 # merge strings
