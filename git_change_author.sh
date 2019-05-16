@@ -49,7 +49,7 @@ fi
 
 # ##### ##### ##### assurance ##### ##### #####
 
-echo '\nAre you sure to change commiter and author of all commits of all branches'
+echo -e '\nAre you sure to change commiter and author of all commits of all branches'
 echo "from <$OLD_EMAIL> to <$NEW_EMAIL> [y/n]?"
 read assurance
 

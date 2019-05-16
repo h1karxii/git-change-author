@@ -13,6 +13,8 @@ without changing commit time.
 This script is for local side that modified from [github example](https://help.github.com/en/articles/changing-author-info)
 which is for remote side rather then local side.
 
+After running this script, you only change local git history.<br>
+You have to update to remote(e.g., github) by youself by using force update(git push -f) to overwrite remote git history.
 
 ## When to use ?
 When you make a new github account and want to move repos from old account to new one,<br>
