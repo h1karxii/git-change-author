@@ -30,7 +30,7 @@ It is useful and more efficient than below methods when you want to make change 
 ## Usage
 ```bash
 
-bash <(curl -s https://raw.githubusercontent.com/h1karxii/git-change-author/master/git_change_author.sh) \
+bash <(curl -fsSL https://raw.githubusercontent.com/h1karxii/git-change-author/master/git_change_author.sh) \
 -o old@email.com -n new@email.com -u newusername
 
 ```
@@ -49,6 +49,7 @@ Just make sure that you are really know about what you are doing.
 [Git Internals - Maintenance and Data Recovery](https://git-scm.com/book/en/v2/Git-Internals-Maintenance-and-Data-Recovery) ([chinese version](https://git-scm.com/book/zh-tw/v1/Git-%E5%85%A7%E9%83%A8%E5%8E%9F%E7%90%86-%E7%B6%AD%E8%AD%B7%E5%8F%8A%E8%B3%87%E6%96%99%E5%BE%A9%E5%8E%9F))
 
 [【冷知識】怎麼樣把檔案真正的從 Git 裡移掉？](https://gitbook.tw/chapters/faq/remove-files-from-git.html)
+
 
 ## Example
 ![example](./example.gif)

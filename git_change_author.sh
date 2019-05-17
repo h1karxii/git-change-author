@@ -1,4 +1,10 @@
 #!/bin/sh
+# https://github.com/h1karxii/git-change-author
+
+exit_err() {
+    [ $# -gt 0 ] && echo "$*" 1>&2
+    exit 1
+}
 
 validate_email(){
     # https://regex101.com/r/n74ZEc/1
@@ -7,14 +13,12 @@ validate_email(){
     # http://godleon.blogspot.com/2007/06/variable-shell-script-variable-object.html
     # https://stackoverflow.com/questions/38757862/what-does-12-mean-in-bash
     if ! [[ "$1" =~ ^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$ ]]; then
-        echo "Email address $1 is invalid." 1>&2;
-        exit 1;
+        exit_err "Error: email address $1 is invalid."
     fi
 }
 
 command_error(){
-    echo "Usage: $0 [-o <OLD_EMAIL>] [-n <NEW_EMAIL>] [-u <NEW_USERNAME>]" 1>&2;
-    exit 1;
+    exit_err "Usage: $0 [-o <OLD_EMAIL>] [-n <NEW_EMAIL>] [-u <NEW_USERNAME>]"
 }
 
 # ##### ##### ##### check for input ##### ##### #####
@@ -43,7 +47,8 @@ while getopts ":o:n:u:" opt; do
 done
 
 # check necessary values are not empty
-if [[ -z "$OLD_EMAIL" || -z "$NEW_EMAIL" || -z "$NEW_USERNAME" ]] ; then
+if [[ -z "$OLD_EMAIL" || -z "$NEW_EMAIL" || -z "$NEW_USERNAME" ]]; then
+    echo "Error: missing required argument."
     command_error
 fi
 
@@ -54,7 +59,7 @@ echo "from <$OLD_EMAIL> to <$NEW_EMAIL> [y/n]?"
 read assurance
 
 if ! [[ ${assurance} == 'y' || ${assurance} == 'Y' ]]; then
-    exit 0;
+    exit 0
 fi
 
 # ##### ##### ##### set command for git ##### ##### #####
