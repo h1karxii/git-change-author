@@ -8,10 +8,6 @@ exit_err() {
 
 validate_email(){
     # https://regex101.com/r/n74ZEc/1
-    # https://stackoverflow.com/questions/32291127/bash-regex-email
-    # http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_04_01.html#sect_04_01_01
-    # http://godleon.blogspot.com/2007/06/variable-shell-script-variable-object.html
-    # https://stackoverflow.com/questions/38757862/what-does-12-mean-in-bash
     if ! [[ "$1" =~ ^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$ ]]; then
         exit_err "Error: email address $1 is invalid."
     fi
@@ -21,10 +17,7 @@ command_error(){
     exit_err "Usage: $0 [-o <OLD_EMAIL>] [-n <NEW_EMAIL>] [-u <NEW_USERNAME>]"
 }
 
-# ##### ##### ##### check for input ##### ##### #####
-# https://blog.yegle.net/2011/04/21/parsing-non-option-argument-bash-getopts/
-# http://www.cnblogs.com/FrankTan/archive/2010/03/01/1634516.html
-# https://stackoverflow.com/questions/16483119/an-example-of-how-to-use-getopts-in-bash
+# ############### check for input arguments ###############
 
 # get values from user input and validate
 while getopts ":o:n:u:" opt; do
@@ -52,7 +45,7 @@ if [[ -z "$OLD_EMAIL" || -z "$NEW_EMAIL" || -z "$NEW_USERNAME" ]]; then
     command_error
 fi
 
-# ##### ##### ##### assurance ##### ##### #####
+# ############### assurance ###############
 
 echo -e '\nAre you sure to change commiter and author of all commits of all branches'
 echo "from <$OLD_EMAIL> to <$NEW_EMAIL> [y/n]?"
@@ -62,7 +55,7 @@ if ! [[ ${assurance} == 'y' || ${assurance} == 'Y' ]]; then
     exit 0
 fi
 
-# ##### ##### ##### set command for git ##### ##### #####
+# ############### set command for git ###############
 
 # merge strings
 vars="
@@ -83,7 +76,7 @@ reset_command='
     fi
 '
 
-# ##### ##### ##### reset committer and author ##### ##### #####
+# ############### reset committer and author ###############
 
 git filter-branch -f --env-filter "$vars$reset_command" --tag-name-filter cat -- --branches --tags
 
